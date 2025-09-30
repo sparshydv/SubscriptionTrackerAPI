@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET, JWT_EXPIRES_IN } from "../config/env.js";
+import { JWT_SECRET, JWT_EXPIRES_IN, NODE_ENV } from "../config/env.js";
 
 //implement signUp logic
 export const signUp = async (req, res, next) => {
@@ -87,4 +87,23 @@ export const signIn = async (req, res, next) => {
 
 
 //implement signOut logic
-export const signOut = async (req, res, next) => {}
+export const signOut = async (req, res, next) => {
+    try{
+        // If you ever switch to cookie-based auth, this clears the cookie.
+        // Safe to call even if no cookie is set.
+        res.clearCookie('token', {
+            httpOnly: true,
+            secure: NODE_ENV === 'production',
+            sameSite: 'lax',
+        });
+
+        // For header-based JWT, sign-out is client-side (discard the token).
+        res.status(200).json({
+            success: true,
+            message: 'Signed out successfully',
+        });
+    }
+    catch(error){
+        next(error);
+    }
+}
