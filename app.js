@@ -13,6 +13,9 @@ import workflowRouter from './routes/workflow.routes.js';
 
 const app = express();
 
+// Trust Render/Proxy to correctly set X-Forwarded-* headers so req.ip is populated
+app.set('trust proxy', 1);
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());

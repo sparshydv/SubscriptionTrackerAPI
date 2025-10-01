@@ -25,7 +25,7 @@ services:
       #   value: your-qstash-token
       # - key: QSTASH_URL
       #   value: your-qstash-url
-      # - key: SERVER_URL
-      #   value: https://your-app-name.onrender.com
+      - key: SERVER_URL
+        value: https://subscriptiontrackerapi.onrender.com
       # - key: EMAIL_PASSWORD
       #   value: your-email-password
