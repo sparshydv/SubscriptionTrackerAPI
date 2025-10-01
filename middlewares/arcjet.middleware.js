@@ -1,29 +1,34 @@
 import aj from "../config/arcjet.js";
 
 const arcjetMiddleware = async (req, res, next) => {
-    try{
-        // Ensure Arcjet receives a concrete client IP when behind a proxy (Render)
+    try {
+        // Detect client IP behind proxies
         const clientIp = (req.headers['x-forwarded-for']?.split(',')[0]?.trim())
             || req.ip
-            || req.socket?.remoteAddress
-            || '';
+            || req.socket?.remoteAddress;
 
-        const decision = await aj.protect(req, { requested: 1, ip: clientIp });
+        // Only include IP if non-empty
+        const characteristics = clientIp ? { ip: clientIp } : {};
 
-        if(decision.isDenied()){
-            if(decision.reason.isRateLimit()) return res.status(429).json({error: 'rate limit exceeded'});
-            if(decision.reason.isBot()) return res.status(403).json({error: 'bot detected'});
+        const decision = await aj.protect(req, {
+            requested: 1,
+            characteristics
+        });
 
-            return res.status(403).json({error: 'Access denied'});
+        if (decision.isDenied()) {
+            if (decision.reason.isRateLimit()) 
+                return res.status(429).json({ error: 'rate limit exceeded' });
+            if (decision.reason.isBot()) 
+                return res.status(403).json({ error: 'bot detected' });
+
+            return res.status(403).json({ error: 'Access denied' });
         }
 
         next();
 
-    }
-    catch(error){
-        console.error("Arcjet middleware error:", error);
-        // If Arcjet fails due to missing IP, allow the request instead of breaking the app
+    } catch (error) {
         if (typeof error?.message === 'string' && error.message.includes('ip') && error.message.includes('empty')) {
+            console.warn("Arcjet warning: missing client IP, skipping fingerprint.");
             return next();
         }
         next(error);
