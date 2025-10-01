@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: subdub-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      # Add your other environment variables here
+      # - key: DB_URI
+      #   value: your-mongodb-connection-string
+      # - key: JWT_SECRET
+      #   value: your-jwt-secret
+      # - key: JWT_EXPIRES_IN
+      #   value: 7d
+      # - key: ARCJET_ENV
+      #   value: production
+      # - key: ARCJET_KEY
+      #   value: your-arcjet-key
+      # - key: QSTASH_TOKEN
+      #   value: your-qstash-token
+      # - key: QSTASH_URL
+      #   value: your-qstash-url
+      # - key: SERVER_URL
+      #   value: https://your-app-name.onrender.com
+      # - key: EMAIL_PASSWORD
+      #   value: your-email-password
