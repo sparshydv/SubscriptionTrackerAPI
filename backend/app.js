@@ -1,0 +1,55 @@
+import express from 'express';
+import cors from 'cors';
+
+import { PORT } from './config/env.js';
+
+import userRouter from './routes/user.routes.js';
+import authRouter from './routes/auth.routes.js';
+import subscriptionRouter from './routes/subscription.routes.js';   
+import connectToDatabase from './database/mongodb.js';
+import errorMiddleware from './middlewares/error.middleware.js';
+import cookieParser from 'cookie-parser';
+import arcjetMiddleware from './middlewares/arcjet.middleware.js';
+import workflowRouter from './routes/workflow.routes.js';
+
+const app = express();
+
+// Trust Render/Proxy to correctly set X-Forwarded-* headers so req.ip is populated
+app.set('trust proxy', 1);
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(cors({
+    origin: true,
+    credentials: true,
+}));
+app.use(arcjetMiddleware);
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/subscriptions', subscriptionRouter);
+app.use('/api/v1/workflows', workflowRouter);
+
+app.get('/api/v1/health', (req, res) => {
+  res.status(200).json({
+    success: true,
+    status: 'ok',
+    service: 'subscription-tracker-api',
+    timestamp: new Date().toISOString(),
+  });
+});
+
+app.get('/', (req, res) => {
+  res.send('welcome to tracker api');
+});
+
+app.use(errorMiddleware);
+
+app.listen(PORT || 5500, async() => {
+    console.log(`tracker api is running on http://localhost:${PORT || 5500}`);
+
+    await connectToDatabase();
+    });
+
+export default app;
