@@ -7,15 +7,33 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signUp } = useAuth();
+  const { signUp, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const handleGoogleSuccess = async (credentialResponse: any) => {
+    setLoading(true);
+    try {
+      if (credentialResponse.credential) {
+        await signInWithGoogle(credentialResponse.credential);
+        navigate("/dashboard");
+      }
+    } catch (err) {
+        const msg = axios.isAxiosError(err)
+            ? err.response?.data?.error || err.response?.data?.message || err.message
+            : "Could not authenticate with Google";
+        toast({ title: "Google Sign up failed", description: msg, variant: "destructive" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,6 +80,27 @@ export default function SignUp() {
             Create Account
           </Button>
         </form>
+
+        <div className="relative mt-6 mb-6">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-border" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <div className="flex justify-center mt-4 mb-4">
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => {
+              toast({ title: "Error", description: "Google Login Failed", variant: "destructive" });
+            }}
+          />
+        </div>
+
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{" "}
           <Link to="/sign-in" className="font-medium text-primary hover:underline">Sign in</Link>

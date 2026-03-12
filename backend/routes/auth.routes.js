@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { signIn, signOut, signUp } from '../controllers/auth.controller.js';
+import { signIn, signOut, signUp, googleSignIn } from '../controllers/auth.controller.js';
 
 const authRouter = Router();
 
@@ -8,6 +8,9 @@ authRouter.post('/sign-up', signUp);
 
 // Path: /api/v1/auth/sign-in (POST)
 authRouter.post('/sign-in', signIn);
+
+// Path: /api/v1/auth/google (POST)
+authRouter.post('/google', googleSignIn);
 
 // Path: /api/v1/auth/sign-out (POST)
 authRouter.post('/sign-out', signOut);

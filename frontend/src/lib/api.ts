@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const DEFAULT_API_ORIGIN = "https://subscriptiontrackerapi-1.onrender.com";
+const DEFAULT_API_ORIGIN = import.meta.env.DEV 
+  ? "http://localhost:5500" 
+  : "https://subscriptiontrackerapi-1.onrender.com";
 const API_ORIGIN = (import.meta.env.VITE_API_URL || DEFAULT_API_ORIGIN).replace(/\/$/, "");
 const API_BASE_URL = `${API_ORIGIN}/api/v1`;
 

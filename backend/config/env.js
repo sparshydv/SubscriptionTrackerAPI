@@ -18,5 +18,6 @@ export const { PORT,
     QSTASH_TOKEN,
     QSTASH_URL,
     SERVER_URL,
-    EMAIL_PASSWORD
+    EMAIL_PASSWORD,
+    GOOGLE_CLIENT_ID
 } = process.env; 
