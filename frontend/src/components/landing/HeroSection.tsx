@@ -1,5 +1,5 @@
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import dashboardMockup from "@/assets/landing/hero-image.png";
+import dashboardMockup from "@/assets/landing/hero-image.webp";
 
 const HeroSection = () => (
   <section className="relative gradient-hero overflow-hidden">
@@ -20,6 +20,8 @@ const HeroSection = () => (
         alt="SubTracker subscription dashboard showing spending analytics and upcoming renewals"
         className="mx-auto rounded-2xl object-cover h-full object-left-top w-full"
         draggable={false}
+        fetchPriority="high"
+        decoding="async"
       />
     </ContainerScroll>
   </section>

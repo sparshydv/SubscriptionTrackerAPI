@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Home } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
+// Prefetch functions — kick off silent downloads on hover
+const prefetchSignIn = () => import("@/pages/SignIn");
+const prefetchSignUp = () => import("@/pages/SignUp");
+const prefetchDashboard = () => import("@/pages/Dashboard");
+
 const navLinks = [
   { name: "Home", icon: Home, active: true },
   { name: "Preview" },
@@ -49,12 +54,14 @@ const Navbar = () => {
           <Link 
             to="/sign-in"
             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            onMouseEnter={prefetchSignIn}
           >
             Login
           </Link>
           <Button
             className="rounded-full px-6 py-2 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-soft"
             onClick={() => navigate("/sign-up")}
+            onMouseEnter={prefetchSignUp}
           >
             Start Tracking Free
           </Button>
@@ -86,12 +93,14 @@ const Navbar = () => {
             <Link 
               to="/sign-in"
               className="block py-3 px-4 text-sm font-medium hover:bg-slate-50 rounded-lg text-center"
+              onMouseEnter={prefetchSignIn}
             >
               Login
             </Link>
             <Button 
               className="w-full rounded-full bg-primary text-primary-foreground py-6 font-semibold shadow-soft"
               onClick={() => navigate("/sign-up")}
+              onMouseEnter={prefetchSignUp}
             >
               Start Tracking Free
             </Button>

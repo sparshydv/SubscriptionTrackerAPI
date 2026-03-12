@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
+const prefetchSignUp = () => import("@/pages/SignUp");
+
 const HeroCTA = () => {
   const navigate = useNavigate();
   return (
@@ -17,6 +19,7 @@ const HeroCTA = () => {
           size="lg" 
           className="rounded-full px-12 py-7 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft transition-all hover:scale-105 active:scale-95"
           onClick={() => navigate("/sign-up")}
+          onMouseEnter={prefetchSignUp}
         >
           Start Tracking Free
         </Button>

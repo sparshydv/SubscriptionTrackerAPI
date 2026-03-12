@@ -6,15 +6,27 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { DashboardLayout } from "@/components/DashboardLayout";
+import { Suspense, lazy } from "react";
+import { Loader2 } from "lucide-react";
+
+// Eager load only the landing page to keep it extremely fast
 import Index from "./pages/Index";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import Dashboard from "./pages/Dashboard";
-import Subscriptions from "./pages/Subscriptions";
-import NewSubscription from "./pages/NewSubscription";
-import SubscriptionDetail from "./pages/SubscriptionDetail";
-import Profile from "./pages/Profile";
-import NotFound from "./pages/NotFound";
+
+// Lazy load everything else
+const SignIn = lazy(() => import("./pages/SignIn"));
+const SignUp = lazy(() => import("./pages/SignUp"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Subscriptions = lazy(() => import("./pages/Subscriptions"));
+const NewSubscription = lazy(() => import("./pages/NewSubscription"));
+const SubscriptionDetail = lazy(() => import("./pages/SubscriptionDetail"));
+const Profile = lazy(() => import("./pages/Profile"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+const PageLoader = () => (
+  <div className="flex min-h-screen items-center justify-center bg-background">
+    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+  </div>
+);
 
 const queryClient = new QueryClient();
 
@@ -25,19 +37,21 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/subscriptions" element={<Subscriptions />} />
-              <Route path="/subscriptions/new" element={<NewSubscription />} />
-              <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/subscriptions" element={<Subscriptions />} />
+                <Route path="/subscriptions/new" element={<NewSubscription />} />
+                <Route path="/subscriptions/:id" element={<SubscriptionDetail />} />
+                <Route path="/profile" element={<Profile />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

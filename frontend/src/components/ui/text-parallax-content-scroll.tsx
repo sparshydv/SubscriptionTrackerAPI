@@ -197,21 +197,21 @@ export const TextParallaxContentExample = () => {
   return (
     <div className="bg-white">
       <TextParallaxContent
-        imgUrl="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop"
+        imgUrl="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1400&auto=format&fit=crop"
         subheading="All in one place"
         heading="Subscription Tracking"
       >
         <TrackingContent />
       </TextParallaxContent>
       <TextParallaxContent
-        imgUrl="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=2574&auto=format&fit=crop"
+        imgUrl="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=1400&auto=format&fit=crop"
         subheading="Never miss a date"
         heading="Renewal Reminders"
       >
         <RemindersContent />
       </TextParallaxContent>
       <TextParallaxContent
-        imgUrl="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop"
+        imgUrl="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1400&auto=format&fit=crop"
         subheading="See where money goes"
         heading="Spending Insights"
       >

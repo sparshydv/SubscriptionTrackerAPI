@@ -15,6 +15,13 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
+// Prefetch route chunks on sidebar hover
+const prefetchers: Record<string, () => Promise<unknown>> = {
+  "/dashboard": () => import("@/pages/Dashboard"),
+  "/subscriptions": () => import("@/pages/Subscriptions"),
+  "/profile": () => import("@/pages/Profile"),
+};
+
 const navItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
   { title: "Subscriptions", url: "/subscriptions", icon: CreditCard },
@@ -39,7 +46,12 @@ export function AppSidebar() {
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={location.pathname.startsWith(item.url)}>
-                    <NavLink to={item.url} className="hover:bg-sidebar-accent/50" activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium">
+                    <NavLink
+                      to={item.url}
+                      className="hover:bg-sidebar-accent/50"
+                      activeClassName="bg-sidebar-accent text-sidebar-accent-foreground font-medium"
+                      onMouseEnter={() => prefetchers[item.url]?.()}
+                    >
                       <item.icon className="mr-2 h-4 w-4" />
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>
