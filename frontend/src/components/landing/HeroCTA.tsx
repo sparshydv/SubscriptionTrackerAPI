@@ -17,7 +17,7 @@ const HeroCTA = () => {
       >
         <Button 
           size="lg" 
-          className="rounded-full px-12 py-7 text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft transition-all hover:scale-105 active:scale-95"
+          className="rounded-full px-8 md:px-12 py-6 md:py-7 text-base md:text-lg font-bold bg-primary text-primary-foreground hover:bg-primary/90 shadow-soft transition-all hover:scale-105 active:scale-95"
           onClick={() => navigate("/sign-up")}
           onMouseEnter={prefetchSignUp}
         >

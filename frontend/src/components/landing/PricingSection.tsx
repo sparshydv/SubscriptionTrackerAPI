@@ -34,11 +34,11 @@ const PricingSection = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="max-w-md mx-auto glass-card p-8 text-center hover:shadow-elevated transition-shadow duration-300"
+        className="max-w-md mx-auto glass-card p-6 md:p-8 text-center hover:shadow-elevated transition-shadow duration-300"
       >
         <p className="text-sm font-medium text-primary tracking-wide uppercase">Free Plan</p>
         <div className="mt-4 flex items-baseline justify-center gap-1">
-          <span className="text-5xl font-bold font-heading text-foreground">$0</span>
+          <span className="text-4xl md:text-5xl font-bold font-heading text-foreground">$0</span>
           <span className="text-muted-foreground">/month</span>
         </div>
         <ul className="mt-8 space-y-4 text-left">

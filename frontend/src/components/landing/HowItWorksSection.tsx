@@ -14,24 +14,26 @@ const HowItWorksSection = () => (
       How it works
     </div>
     <div className="mx-auto max-w-7xl px-6 lg:px-8">
-      <div className="flex flex-row gap-10 overflow-x-auto py-1 no-scrollbar">
+      <div className="flex flex-col lg:flex-row gap-12 lg:gap-10 py-1">
         {steps.map((step) => (
-          <div key={step.num} className="min-w-[280px] flex-1">
+          <div key={step.num} className="relative flex-1">
             <div className="flex items-center text-4xl font-semibold leading-6 text-foreground">
               <svg viewBox="0 0 4 4" className="mr-4 h-1 w-1 flex-none" aria-hidden="true">
                 <circle cx="2" cy="2" r="2" fill="currentColor" />
               </svg>
               {step.num}
               <div
-                className="absolute -ml-2 h-px w-screen -translate-x-full bg-foreground/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"
+                className="hidden lg:block absolute -ml-2 h-px w-screen -translate-x-full bg-foreground/10 sm:-ml-4 lg:static lg:-mr-6 lg:ml-8 lg:w-auto lg:flex-auto lg:translate-x-0"
                 aria-hidden="true"
               />
             </div>
             <p className="mt-6 mb-3 text-xl font-semibold leading-8 tracking-tight text-foreground text-left">
               {step.title}
             </p>
-            <img src={step.img} alt={step.title} className="w-full" />
-            <p className="mt-2 text-base leading-7 text-foreground text-left">
+            <div className="rounded-2xl overflow-hidden bg-secondary/20 p-4 mb-4">
+              <img src={step.img} alt={step.title} className="w-full h-auto object-contain max-h-[300px]" />
+            </div>
+            <p className="mt-2 text-base leading-7 text-muted-foreground text-left">
               {step.desc}
             </p>
           </div>

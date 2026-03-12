@@ -16,14 +16,13 @@ const HeroSection = () => (
           <Link
             to="/sign-up"
             onMouseEnter={prefetchSignUp}
-            className="group flex items-center gap-3 rounded-full border-4 border-transparent hover:border-primary px-8 py-2 transition-all duration-300 whitespace-nowrap"
+            className="group flex items-center gap-3 rounded-full border-4 border-transparent hover:border-primary px-4 md:px-8 py-2 transition-all duration-300 sm:whitespace-nowrap"
           >
-            <h1 className="text-5xl md:text-[6rem] font-bold mt-1 leading-none text-foreground cursor-pointer whitespace-nowrap">
+            <h1 className="text-3xl sm:text-5xl md:text-[6rem] font-bold mt-1 leading-none text-foreground cursor-pointer sm:whitespace-nowrap text-center sm:text-left">
               Start Tracking Free
             </h1>
             <ArrowRight
-              className="shrink-0 text-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300"
-              size={48}
+              className="shrink-0 text-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300 w-8 h-8 md:w-12 md:h-12"
             />
           </Link>
         </div>
