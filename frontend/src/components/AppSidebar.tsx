@@ -30,10 +30,14 @@ const navItems = [
 ];
 
 export function AppSidebar() {
-  const { state } = useSidebar();
+  const { state, setOpenMobile } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
   const { signOut, user } = useAuth();
+
+  const handleNavClick = () => {
+    setOpenMobile(false);
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -46,7 +50,11 @@ export function AppSidebar() {
             <SidebarMenu>
               {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={location.pathname.startsWith(item.url)}>
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={location.pathname.startsWith(item.url)}
+                    onClick={handleNavClick}
+                  >
                     <NavLink
                       to={item.url}
                       className="hover:bg-sidebar-accent/50"
@@ -71,7 +79,13 @@ export function AppSidebar() {
         )}
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton onClick={signOut} className="text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50">
+            <SidebarMenuButton 
+              onClick={() => {
+                handleNavClick();
+                signOut();
+              }} 
+              className="text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
+            >
               <LogOut className="mr-2 h-4 w-4" />
               {!collapsed && <span>Sign Out</span>}
             </SidebarMenuButton>
