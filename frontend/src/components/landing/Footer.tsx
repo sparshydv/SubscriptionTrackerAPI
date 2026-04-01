@@ -1,3 +1,5 @@
+import { Logo } from "@/components/ui/Logo";
+
 const footerLinks = {
   Product: ["Features", "Pricing", "FAQ"],
   Company: ["About", "Privacy", "Contact"],
@@ -9,9 +11,8 @@ const Footer = () => (
     <div className="container mx-auto px-4 lg:px-8">
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
-          <a href="#" className="flex items-center gap-2 font-heading text-lg font-bold text-foreground">
-            <div className="w-7 h-7 rounded-lg gradient-cta flex items-center justify-center text-primary-foreground text-xs font-bold">S</div>
-            SubTracker
+          <a href="#" className="flex items-center">
+            <Logo iconClassName="gradient-cta" size="sm" />
           </a>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
             Track subscriptions, save money, stay in control.

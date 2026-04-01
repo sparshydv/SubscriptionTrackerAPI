@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Home } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { Logo } from "@/components/ui/Logo";
 
 // Prefetch functions — kick off silent downloads on hover
 const prefetchSignIn = () => import("@/pages/SignIn");
@@ -23,11 +24,8 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex items-center justify-between bg-white/50 backdrop-blur-sm">
       {/* Logo */}
       <div className="flex flex-1 items-center justify-start">
-        <a href="#" className="flex items-center gap-2 font-heading text-xl font-bold text-foreground">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold">
-            S
-          </div>
-          SubTracker
+        <a href="#" className="flex items-center">
+          <Logo />
         </a>
       </div>
 

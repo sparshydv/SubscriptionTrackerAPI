@@ -2,6 +2,7 @@ import { LayoutDashboard, CreditCard, User, LogOut } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { Logo } from "@/components/ui/Logo";
 import {
   Sidebar,
   SidebarContent,
@@ -38,9 +39,9 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-sidebar-primary font-bold text-base tracking-tight mb-2">
-            {!collapsed && "SubTrack"}
-          </SidebarGroupLabel>
+          <div className="px-2 py-4">
+            <Logo showText={!collapsed} size="sm" iconClassName="bg-sidebar-primary text-sidebar-primary-foreground" />
+          </div>
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
