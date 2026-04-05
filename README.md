@@ -1,5 +1,7 @@
 # Subscription Management System
 
+![SubTracker Hero](frontend/src/assets/landing/hero-image.webp)
+
 A production-ready full-stack Subscription Management application that seamlessly pairs a robust **Node.js/Express backend API** and a modern **React frontend**. The system handles user authentication, automated subscriptions, database management, and business logic with an interactive and highly responsive UI.
 
 ---
@@ -29,6 +31,16 @@ A production-ready full-stack Subscription Management application that seamlessl
 - **Automated Workflows**: Upstash integration ensures users get email reminders at appropriate intervals.
 - **Robust Database**: MongoDB modeled via Mongoose, providing scalable data handling.
 - **Global Error Handling**: Comprehensive backend middleware to handle and log runtime errors consistently.
+
+---
+
+## 📸 Screenshots
+
+### Dashboard Overview
+![Dashboard Overview](assets/dashboard.png)
+
+### User Registration
+![User Registration](assets/register.png)
 
 ---
 
