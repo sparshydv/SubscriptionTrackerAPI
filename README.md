@@ -36,11 +36,14 @@ A production-ready full-stack Subscription Management application that seamlessl
 
 ## 📸 Screenshots
 
-### Dashboard Overview
-![Dashboard Overview](assets/dashboard.png)
+### Hero
+![Hero](frontend/public/hero.png)
 
-### User Registration
-![User Registration](assets/register.png)
+### Dashboard
+![Dashboard](frontend/public/dashboard.png)
+
+### Login Page
+![Login Page](frontend/public/login_page.png)
 
 ---
 
